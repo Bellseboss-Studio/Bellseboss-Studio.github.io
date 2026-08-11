@@ -1,0 +1,238 @@
+---
+import { games } from '../data/games';
+
+function getStatusColor(status: string): string {
+  switch (status) {
+    case 'Released':
+      return 'var(--color-neon-green)';
+    case 'In Development':
+      return 'var(--color-neon-yellow)';
+    case 'Prototype':
+      return 'var(--color-neon-cyan)';
+    default:
+      return 'var(--color-text-muted)';
+  }
+}
+---
+
+<section id="games" class="section games">
+  <div class="container">
+    <div class="games__header reveal">
+      <p class="section__label">// Projects</p>
+      <h2 class="section__title">Our Games</h2>
+      <p class="section__subtitle">
+        Every game is a universe we built from scratch. Press start to explore.
+      </p>
+    </div>
+
+    <div class="games__grid">
+      {games.map((game, index) => (
+        <article
+          class="game-card reveal"
+          style={`animation-delay: ${index * 0.1}s; --status-color: ${getStatusColor(game.status)}`}
+        >
+          <div class="game-card__border" aria-hidden="true"></div>
+          <div class="game-card__header">
+            <div class="game-card__status">
+              <span class="game-card__status-dot" aria-hidden="true"></span>
+              <span class="game-card__status-text">{game.status}</span>
+            </div>
+            <span class="game-card__index">0{index + 1}</span>
+          </div>
+          <div class="game-card__body">
+            <h3 class="game-card__title">{game.title}</h3>
+            <p class="game-card__genre">{game.genre}</p>
+            <p class="game-card__description">{game.description}</p>
+            <div class="game-card__tags">
+              {game.tags.map(tag => (
+                <span class="game-card__tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+          {game.itchLink && (
+            <div class="game-card__footer">
+              <a
+                href={game.itchLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="game-card__play"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                Play Now
+              </a>
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .games__header {
+    margin-bottom: 4rem;
+  }
+
+  .games__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    gap: 2rem;
+  }
+
+  .game-card {
+    position: relative;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all var(--transition-slow);
+    overflow: hidden;
+  }
+
+  .game-card__border {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--color-border), transparent, var(--color-border));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+    pointer-events: none;
+  }
+
+  .game-card:hover .game-card__border {
+    opacity: 1;
+    background: linear-gradient(135deg, var(--color-neon-purple), transparent, var(--color-neon-pink));
+  }
+
+  .game-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 0 40px var(--color-neon-purple-glow);
+  }
+
+  .game-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .game-card__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--status-color) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--status-color) 30%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--status-color);
+    text-transform: uppercase;
+  }
+
+  .game-card__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--status-color);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .game-card__index {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .game-card__title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+
+  .game-card__genre {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-neon-purple);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .game-card__description {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .game-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .game-card__tag {
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    letter-spacing: 0.03em;
+    transition: all var(--transition-base);
+  }
+
+  .game-card:hover .game-card__tag {
+    border-color: rgba(168, 85, 247, 0.3);
+    color: var(--color-text);
+  }
+
+  .game-card__footer {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .game-card__play {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    transition: all var(--transition-base);
+  }
+
+  .game-card__play svg {
+    color: var(--color-neon-purple);
+    transition: all var(--transition-base);
+  }
+
+  .game-card:hover .game-card__play {
+    color: var(--color-neon-purple);
+    gap: 0.7rem;
+  }
+
+  .game-card:hover .game-card__play svg {
+    transform: scale(1.1);
+  }
+</style>

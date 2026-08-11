@@ -1,0 +1,198 @@
+---
+import { studio } from '../data/studio';
+---
+
+<footer id="contact" class="footer">
+  <div class="footer__glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="footer__cta reveal">
+      <h2 class="footer__cta-title">Ready to Start Your Quest?</h2>
+      <p class="footer__cta-text">
+        Whether you need a full game, a prototype, or just want to say hi — we're here.
+      </p>
+      <a href={`mailto:${studio.contact.email}`} class="btn btn--primary footer__cta-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+        {studio.contact.email}
+      </a>
+    </div>
+
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <h3 class="footer__brand-name">{studio.name}</h3>
+        <p class="footer__brand-desc">{studio.description}</p>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__col-title">Navigate</h4>
+        <ul class="footer__col-list">
+          <li><a href="#games">Games</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#services">Services</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__col-title">Community</h4>
+        <ul class="footer__col-list">
+          <li><a href={studio.contact.itch} target="_blank" rel="noopener noreferrer">itch.io</a></li>
+          <li><a href={studio.contact.github} target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copyright">
+        &copy; {new Date().getFullYear()} {studio.name}. All rights reserved.
+      </p>
+      <p class="footer__made">
+        <span class="footer__made-dot" aria-hidden="true"></span>
+        Made with passion & pixels
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    padding: 6rem 0 2rem;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+    overflow: hidden;
+  }
+
+  .footer__glow {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 200px;
+    background: radial-gradient(ellipse, var(--color-neon-purple-glow), transparent);
+    pointer-events: none;
+  }
+
+  .footer__cta {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .footer__cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+
+  .footer__cta-text {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer__cta-btn {
+    font-size: 1rem;
+  }
+
+  .footer__grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .footer__brand {
+    max-width: 320px;
+  }
+
+  .footer__brand-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .footer__brand-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .footer__col-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+
+  .footer__col-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer__col-list a {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    transition: color var(--transition-base);
+  }
+
+  .footer__col-list a:hover {
+    color: var(--color-neon-purple);
+  }
+
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer__copyright,
+  .footer__made {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+  }
+
+  .footer__made {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .footer__made-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-neon-green);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @media (max-width: 640px) {
+    .footer__grid {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

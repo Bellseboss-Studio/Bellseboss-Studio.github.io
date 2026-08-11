@@ -1,0 +1,129 @@
+---
+import { studio } from '../data/studio';
+---
+
+<section id="services" class="section services">
+  <div class="container">
+    <div class="services__header reveal">
+      <p class="section__label">// Services</p>
+      <h2 class="section__title">What We Do</h2>
+      <p class="section__subtitle">
+        Our toolkit goes beyond pixels. Here's how we help you level up.
+      </p>
+    </div>
+
+    <div class="services__grid">
+      {studio.services.map((service, index) => (
+        <div class="service-card reveal" style={`animation-delay: ${index * 0.15}s`}>
+          <div class="service-card__corner" aria-hidden="true"></div>
+          <div class="service-card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke-linejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="service-card__title">{service.title}</h3>
+          <p class="service-card__description">{service.description}</p>
+          <div class="service-card__footer">
+            <span class="service-card__tag">Available</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services__header {
+    margin-bottom: 4rem;
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    position: relative;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2.2rem;
+    transition: all var(--transition-slow);
+    overflow: hidden;
+  }
+
+  .service-card__corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, transparent 50%, var(--color-neon-purple-glow) 50%);
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+  }
+
+  .service-card:hover .service-card__corner {
+    opacity: 1;
+  }
+
+  .service-card:hover {
+    border-color: rgba(168, 85, 247, 0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  }
+
+  .service-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    color: var(--color-neon-purple);
+    margin-bottom: 1.5rem;
+    transition: all var(--transition-base);
+  }
+
+  .service-card:hover .service-card__icon {
+    background: rgba(168, 85, 247, 0.15);
+    box-shadow: 0 0 20px var(--color-neon-purple-glow);
+  }
+
+  .service-card__title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .service-card__description {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-card__footer {
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .service-card__tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-neon-green);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+</style>

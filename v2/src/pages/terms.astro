@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { studio } from '../data/studio';
+---
+
+<Layout title={`${studio.name} — Terms & Conditions`}>
+  <div class="legal-page">
+    <div class="container">
+      <div class="legal__content reveal">
+        <h1 class="legal__title">Terms & Conditions</h1>
+        <p class="legal__updated">Last updated: August 2024</p>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>
+          By accessing this website, you accept these Terms and Conditions.
+        </p>
+
+        <h2>2. Use of the Site</h2>
+        <p>
+          Use this Site only for lawful purposes and in a manner that does not infringe upon the rights of others.
+        </p>
+
+        <h2>3. Intellectual Property</h2>
+        <p>
+          All content is the property of {studio.name} and is protected by intellectual property laws.
+        </p>
+
+        <h2>4. Disclaimer</h2>
+        <p>
+          Information is provided "as is" without warranties of any kind.
+        </p>
+
+        <h2>5. Contact</h2>
+        <p>
+          Questions? Contact us at{' '}
+          <a href={`mailto:${studio.contact.email}`}>{studio.contact.email}</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-page {
+    padding: 8rem 0 4rem;
+    min-height: 100vh;
+  }
+
+  .legal__content {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .legal__title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .legal__updated {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .legal__content h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 2rem 0 0.8rem;
+    color: var(--color-neon-cyan);
+  }
+
+  .legal__content p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .legal__content a {
+    color: var(--color-neon-purple);
+  }
+
+  .legal__content a:hover {
+    text-decoration: underline;
+  }
+</style>
