@@ -1,0 +1,12 @@
+# Local tooling
+.agents/
+skills-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vs/
+.vscode/
+.idea/
